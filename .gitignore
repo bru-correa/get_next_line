@@ -1,0 +1,6 @@
+*.txt
+.vscode
+*.debug
+debug
+compile_flags.txt
+.vimspector.json

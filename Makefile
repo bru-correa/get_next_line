@@ -1,5 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/07 23:50:03 by bcorrea-          #+#    #+#              #
+#    Updated: 2021/10/07 23:50:06 by bcorrea-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -D BUFFER_SIZE=42
+CFLAGS	= -Wall -Wextra -Werror -D BUFFER_SIZE=5
 MAIN	= get_next_line.c get_next_line_utils.c
 
 
@@ -11,4 +23,7 @@ clean:
 
 re: clean all
 
-.PHONY: all clean re
+debug:
+	$(CC) $(CFLAGS) -g $(MAIN) -I./ -o debug
+
+.PHONY: all clean re debug
