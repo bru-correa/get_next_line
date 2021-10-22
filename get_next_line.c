@@ -14,12 +14,6 @@
 
 char	*get_next_line(int fd)
 {
-	char	*buffer;
-
-	buffer = (char *)malloc(BUFFER_SIZE);
-	while (read(fd, buffer, BUFFER_SIZE) > 0)
-		printf("%s", buffer);
-	return buffer;
 }
 
 /* Reads the file until \n or \0. Returns the text */
