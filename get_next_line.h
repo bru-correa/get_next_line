@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:50:06 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/10/07 14:40:31 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:06:01 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 */
 char	*get_next_line(int fd);
 
+char	*get_text(int fd, char **remainder);
+char	*get_line(char *text);
+char	*get_remainder(char *text);
 
 /**
  * @brief Calculates the length of the string s, excluding the terminatig null
