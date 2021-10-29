@@ -6,7 +6,7 @@
 #    By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 23:50:03 by bcorrea-          #+#    #+#              #
-#    Updated: 2021/10/28 17:26:53 by bcorrea-         ###   ########.fr        #
+#    Updated: 2021/10/28 18:19:36 by bcorrea-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,6 @@ re: clean all
 debug:
 	$(CC) $(CFLAGS) -g $(MAIN) -I./ -o debug
 
-leak:
+leak: debug
 	valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-reachable=yes --num-callers=20 --track-fds=yes ./debug
 .PHONY: all clean re debug leak

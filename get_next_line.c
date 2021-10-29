@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:57:47 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/10/28 17:28:17 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/10/29 20:43:55 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,16 @@ char	*get_next_line(int fd)
 		text = remainder;
 	else
 		text = get_text(fd, &remainder);
+	if (text == NULL)
+		return (NULL);
 	remainder = get_remainder(text);
 	line = get_line(text);
 	free(text);
 	if (line == NULL)
+	{
 		free(line);
+		line = NULL;
+	}
 	return (line);
 }
 
@@ -54,11 +59,15 @@ char	*get_text(int fd, char **remainder)
 	while (read_len > 0)
 	{
 		read_len = read(fd, buffer, BUFFER_SIZE);
-		if (read_len <= 0)
+		if (read_len <= 0 || read_len > BUFFER_SIZE)
 		{
 			free(buffer);
-			free(text);
-			return (NULL);
+			if (*text == '\0')
+			{
+				free(text);
+				return (NULL);
+			}
+			return (text);
 		}
 		buffer[read_len] = '\0';
 		current_buffer = text;
@@ -124,26 +133,26 @@ char	*get_remainder(char *text)
 	return (remainder);
 }
 
-void	test_gnl(int fd)
-{
-	char	*line;
-	do
-	{
-		line = get_next_line(fd);
-		if (line)
-			printf("%s", line);
-		free(line);
-	} while (line != NULL);
-	printf("-END-\n");
-}
+// void	test_gnl(char *path)
+// {
+// 	char	*line;
+// 	int		fd;
 
-int	main(void)
-{
-	int		fd;
+// 	fd = open(path, O_RDONLY);
+// 	do
+// 	{
+// 		line = get_next_line(fd);
+// 		if (line)
+// 			printf("%s", line);
+// 		free(line);
+// 	} while (line != NULL);
+// 	printf("-END-\n");
+// 	close(fd);
+// }
 
-	fd = open("text2.txt", O_RDONLY);
-	test_gnl(fd);
-	fd = open("text.txt", O_RDONLY);
-	test_gnl(fd);
-	return (0);
-}
+// int	main(void)
+// {
+// 	// test_gnl("./gnlTester/files/41_no_nl");
+// 	get_next_line(5);
+// 	return (0);
+// }
