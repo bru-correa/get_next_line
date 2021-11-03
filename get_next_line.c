@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:57:47 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/11/03 03:10:36 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/11/03 04:57:53 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+/* Get text from remainder or from fd */
 static char	*get_text(int fd, char *remainder)
 {
 	char	*text;
@@ -59,6 +60,7 @@ static char	*get_text(int fd, char *remainder)
 	return (text);
 }
 
+/* Get text from fd until the buffer contains \n or EOF */
 static char	*read_file(int fd, char *total_buffer)
 {
 	char	*current_buffer;
@@ -68,7 +70,8 @@ static char	*read_file(int fd, char *total_buffer)
 	current_buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!current_buffer)
 		return (NULL);
-	while (ft_strchr(total_buffer, '\n') != NULL || !read_len != NULL)
+	read_len = BUFFER_SIZE;
+	while (read_len == BUFFER_SIZE)
 	{
 		read_len = read(fd, current_buffer, BUFFER_SIZE);
 		if (read_len <= 0 || read_len > BUFFER_SIZE)
@@ -78,6 +81,8 @@ static char	*read_file(int fd, char *total_buffer)
 		total_buffer = ft_strjoin(previous_buffer, current_buffer);
 		free(previous_buffer);
 		previous_buffer = NULL;
+		if (ft_strchr(total_buffer, '\n') != NULL)
+			break ;
 	}
 	free(current_buffer);
 	return (total_buffer);
@@ -104,6 +109,7 @@ static char	*get_line(char *text)
 	return (line);
 }
 
+/* Get the text after \n */
 static char	*get_remainder(char *text)
 {
 	char	*remainder;
@@ -127,38 +133,11 @@ static char	*get_remainder(char *text)
 	return (remainder);
 }
 
-// void	test_gnl(char *path)
-// {
-// 	char	*line;
-// 	int		fd;
-
-// 	fd = open(path, O_RDONLY);
-// 	do
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line)
-// 			printf("%s", line);
-// 		free(line);
-// 	} while (line != NULL);
-// 	printf("-END-\n");
-// 	close(fd);
-// }
-
 // int	main(void)
 // {
-// 	// test_gnl("./gnlTester/files/41_no_nl");
-// 	test_gnl("text2.txt");
-// 	return (0);
-// }
+// 	int	fd;
 
-// int	main(void)
-// {
-// 	static char	*remainder;
-// 	int			i;
-
-// 	if (!remainder)
-// 		i = 1;
-// 	if (remainder == NULL)
-// 		i = 1;
+// 	fd = open("./gnlTester/files/42_with_nl", O_RDONLY);
+// 	get_next_line(fd);
 // 	return (0);
 // }

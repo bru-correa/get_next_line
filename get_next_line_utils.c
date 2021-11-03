@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:58:41 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/10/29 22:26:22 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/11/03 04:13:14 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,50 +60,48 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (output_start);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	void	*dest_start;
+// void	*ft_memcpy(void *dest, const void *src, size_t n)
+// {
+// 	void	*dest_start;
 
-	dest_start = dest;
-	if (src == NULL && dest == NULL)
-		return (dest);
-	while (n--)
-		*(unsigned char *) dest++ = *(unsigned char *) src++;
-	return (dest_start);
-}
+// 	dest_start = dest;
+// 	if (src == NULL && dest == NULL)
+// 		return (dest);
+// 	while (n--)
+// 		*(unsigned char *) dest++ = *(unsigned char *) src++;
+// 	return (dest_start);
+// }
+
+// char	*ft_strdup(const char *s)
+// {
+// 	char	*dup;
+// 	size_t	size;
+
+// 	size = (ft_strlen(s) + 1) * sizeof(char);
+// 	dup = (char *)malloc(size);
+// 	if (!dup)
+// 		return (NULL);
+// 	ft_memcpy(dup, s, size);
+// 	return (dup);
+// }
 
 char	*ft_strdup(const char *s)
 {
 	char	*dup;
 	size_t	size;
+	size_t	i;
 
+	if (s == NULL)
+		return (NULL);
 	size = (ft_strlen(s) + 1) * sizeof(char);
-	dup = (char *)malloc(size);
+	dup = malloc(size);
 	if (!dup)
 		return (NULL);
-	ft_memcpy(dup, s, size);
+	i = 0;
+	while (size--)
+	{
+		dup[i] = s[i];
+		i++;
+	}
 	return (dup);
-}
-
-void	*ft_memset(void *dest, int c, size_t len)
-{
-	void	*dest_start;
-
-	dest_start = dest;
-	while (len-- > 0)
-		*(unsigned char *) dest++ = (unsigned char) c;
-	return (dest_start);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	size_t	total_size;
-	void	*mem;
-
-	total_size = nmemb * size;
-	mem = malloc(total_size);
-	if (!mem)
-		return (NULL);
-	mem = ft_memset(mem, 0, total_size);
-	return (mem);
 }
