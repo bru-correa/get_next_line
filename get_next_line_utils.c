@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:58:41 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/10/04 15:59:46 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/10/29 22:26:22 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ size_t	ft_strlen(const char *s)
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+		return (NULL);
 	if (c > 127)
 		c %= 256;
 	while (*s)
@@ -83,3 +85,25 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
+void	*ft_memset(void *dest, int c, size_t len)
+{
+	void	*dest_start;
+
+	dest_start = dest;
+	while (len-- > 0)
+		*(unsigned char *) dest++ = (unsigned char) c;
+	return (dest_start);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	size_t	total_size;
+	void	*mem;
+
+	total_size = nmemb * size;
+	mem = malloc(total_size);
+	if (!mem)
+		return (NULL);
+	mem = ft_memset(mem, 0, total_size);
+	return (mem);
+}

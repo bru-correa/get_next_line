@@ -6,24 +6,29 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:57:47 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/10/29 20:43:55 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/11/03 03:10:36 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+static char	*get_text(int fd, char *remainder);
+static char	*read_file(int fd, char *total_buffer);
+static char	*get_line(char *text);
+static char	*get_remainder(char *text);
+
 char	*get_next_line(int fd)
 {
 	char			*line;
 	char			*text;
-	static char		*remainder = NULL;
+	static char		*remainder;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (remainder != NULL && ft_strchr(remainder, '\n') != NULL)
+	if (ft_strchr(remainder, '\n') != NULL)
 		text = remainder;
 	else
-		text = get_text(fd, &remainder);
+		text = get_text(fd, remainder);
 	if (text == NULL)
 		return (NULL);
 	remainder = get_remainder(text);
@@ -37,63 +42,54 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-char	*get_text(int fd, char **remainder)
+static char	*get_text(int fd, char *remainder)
 {
 	char	*text;
-	char	*buffer;
-	char	*current_buffer;
-	size_t	read_len;
 
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	if (*remainder != NULL)
-	{
-		text = ft_strdup(*remainder);
-		free(*remainder);
-		*remainder = NULL;
-	}
-	else
+	if (remainder == NULL)
 		text = ft_strdup("");
-	read_len = 1;
-	while (read_len > 0)
+	else
+		text = remainder;
+	text = read_file(fd, text);
+	if (*text == '\0')
 	{
-		read_len = read(fd, buffer, BUFFER_SIZE);
-		if (read_len <= 0 || read_len > BUFFER_SIZE)
-		{
-			free(buffer);
-			if (*text == '\0')
-			{
-				free(text);
-				return (NULL);
-			}
-			return (text);
-		}
-		buffer[read_len] = '\0';
-		current_buffer = text;
-		text = ft_strjoin(text, buffer);
-		free(current_buffer);
-		current_buffer = NULL;
-		if (text != NULL && ft_strchr(text, '\n'))
-		{
-			free(buffer);
-			return (text);
-		}
+		free(text);
+		text = NULL;
 	}
-	free(buffer);
 	return (text);
 }
 
+static char	*read_file(int fd, char *total_buffer)
+{
+	char	*current_buffer;
+	char	*previous_buffer;
+	size_t	read_len;
+
+	current_buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!current_buffer)
+		return (NULL);
+	while (ft_strchr(total_buffer, '\n') != NULL || !read_len != NULL)
+	{
+		read_len = read(fd, current_buffer, BUFFER_SIZE);
+		if (read_len <= 0 || read_len > BUFFER_SIZE)
+			break ;
+		current_buffer[read_len] = '\0';
+		previous_buffer = total_buffer;
+		total_buffer = ft_strjoin(previous_buffer, current_buffer);
+		free(previous_buffer);
+		previous_buffer = NULL;
+	}
+	free(current_buffer);
+	return (total_buffer);
+}
 
 /* Get the text before \n or \0 */
-char	*get_line(char *text)
+static char	*get_line(char *text)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	if (!text)
-		return (NULL);
 	while (text[i] != '\n' && text[i] != '\0')
 		i++;
 	line = malloc((i + 2) * sizeof(char));
@@ -108,14 +104,12 @@ char	*get_line(char *text)
 	return (line);
 }
 
-char	*get_remainder(char *text)
+static char	*get_remainder(char *text)
 {
 	char	*remainder;
 	size_t	len;
 	size_t	i;
 
-	if (!text)
-		return (NULL);
 	remainder = ft_strchr(text, '\n');
 	if (!remainder)
 		return (NULL);
@@ -153,6 +147,18 @@ char	*get_remainder(char *text)
 // int	main(void)
 // {
 // 	// test_gnl("./gnlTester/files/41_no_nl");
-// 	get_next_line(5);
+// 	test_gnl("text2.txt");
+// 	return (0);
+// }
+
+// int	main(void)
+// {
+// 	static char	*remainder;
+// 	int			i;
+
+// 	if (!remainder)
+// 		i = 1;
+// 	if (remainder == NULL)
+// 		i = 1;
 // 	return (0);
 // }

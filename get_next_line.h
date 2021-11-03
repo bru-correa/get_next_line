@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:50:06 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/10/26 18:06:01 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/10/29 22:46:50 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@
  * @param fd File descriptor to read from
  * @return Read line or NULL if nothing else to read or an error accurred
 */
-char	*get_next_line(int fd);
+char		*get_next_line(int fd);
 
-char	*get_text(int fd, char **remainder);
-char	*get_line(char *text);
-char	*get_remainder(char *text);
+// static char	*get_text(int fd, char **remainder);
+// static char	*get_line(char *text);
+// static char	*get_remainder(char *text);
+// static char	*read_file(int fd, char *total_buffer);
 
 /**
  * @brief Calculates the length of the string s, excluding the terminatig null
@@ -44,7 +45,7 @@ char	*get_remainder(char *text);
  * @param s Constant string to be analysed
  * @return size_t Returns the number of bytes in the string s
 */
-size_t	ft_strlen(const char *s);
+size_t		ft_strlen(const char *s);
 
 /**
  * @brief Copies n bytes from memory area src to memory area dest. The memory
@@ -55,7 +56,7 @@ size_t	ft_strlen(const char *s);
  * @param n Buffer size in bytes
  * @return void* Returns dest
 */
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
 
 /**
  * @brief Returns a pointer to the first occurrence of the character in the
@@ -65,7 +66,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
  * @param c The character to be found
  * @return char* Returns the pointer to c if found or NULL if not
 */
-char	*ft_strchr(const char *s, int c);
+char		*ft_strchr(const char *s, int c);
 
 /**
  * @brief Allocates (with malloc(3)) and returns a new string, which is the
@@ -75,7 +76,7 @@ char	*ft_strchr(const char *s, int c);
  * @param s2 The suffix string
  * @return char* The new string. NULL if the allocation fails
 */
-char	*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char const *s1, char const *s2);
 
 /**
  * @brief Returns a pointer to a new string which is a duplicate of the string
@@ -85,6 +86,10 @@ char	*ft_strjoin(char const *s1, char const *s2);
  * @Return char* Returns a pointer to the duplicated string, or NULL if
  * insufficient memory was available
 */
-char	*ft_strdup(const char *s);
+char		*ft_strdup(const char *s);
+
+/* TEMPORARY */
+void		*ft_memset(void *dest, int c, size_t len);
+void		*ft_calloc(size_t nmemb, size_t size);
 
 #endif
