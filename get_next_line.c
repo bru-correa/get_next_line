@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:57:47 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/11/03 04:57:53 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/11/03 05:24:05 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ char	*get_next_line(int fd)
 	line = get_line(text);
 	free(text);
 	if (line == NULL)
-	{
-		free(line);
-		line = NULL;
-	}
+		reset_ptr(line);
 	return (line);
 }
 
@@ -53,10 +50,7 @@ static char	*get_text(int fd, char *remainder)
 		text = remainder;
 	text = read_file(fd, text);
 	if (*text == '\0')
-	{
-		free(text);
-		text = NULL;
-	}
+		reset_ptr(text);
 	return (text);
 }
 
@@ -79,8 +73,7 @@ static char	*read_file(int fd, char *total_buffer)
 		current_buffer[read_len] = '\0';
 		previous_buffer = total_buffer;
 		total_buffer = ft_strjoin(previous_buffer, current_buffer);
-		free(previous_buffer);
-		previous_buffer = NULL;
+		reset_ptr(previous_buffer);
 		if (ft_strchr(total_buffer, '\n') != NULL)
 			break ;
 	}
@@ -132,12 +125,3 @@ static char	*get_remainder(char *text)
 	remainder[i] = '\0';
 	return (remainder);
 }
-
-// int	main(void)
-// {
-// 	int	fd;
-
-// 	fd = open("./gnlTester/files/42_with_nl", O_RDONLY);
-// 	get_next_line(fd);
-// 	return (0);
-// }

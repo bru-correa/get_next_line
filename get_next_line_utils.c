@@ -6,11 +6,17 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:58:41 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/11/03 04:13:14 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/11/03 05:12:36 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	reset_ptr(void *ptr)
+{
+	free(ptr);
+	ptr = NULL;
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -59,31 +65,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	*output = '\0';
 	return (output_start);
 }
-
-// void	*ft_memcpy(void *dest, const void *src, size_t n)
-// {
-// 	void	*dest_start;
-
-// 	dest_start = dest;
-// 	if (src == NULL && dest == NULL)
-// 		return (dest);
-// 	while (n--)
-// 		*(unsigned char *) dest++ = *(unsigned char *) src++;
-// 	return (dest_start);
-// }
-
-// char	*ft_strdup(const char *s)
-// {
-// 	char	*dup;
-// 	size_t	size;
-
-// 	size = (ft_strlen(s) + 1) * sizeof(char);
-// 	dup = (char *)malloc(size);
-// 	if (!dup)
-// 		return (NULL);
-// 	ft_memcpy(dup, s, size);
-// 	return (dup);
-// }
 
 char	*ft_strdup(const char *s)
 {

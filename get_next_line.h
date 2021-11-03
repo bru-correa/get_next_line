@@ -6,7 +6,7 @@
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:50:06 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/10/29 22:46:50 by bcorrea-         ###   ########.fr       */
+/*   Updated: 2021/11/03 05:16:22 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
-/* REMOVE LATER */
-# include <stdio.h>
-# include <fcntl.h>
 
 /**
  * @brief Write a function which returns a line read from a file descriptor
@@ -33,10 +28,13 @@
 */
 char		*get_next_line(int fd);
 
-// static char	*get_text(int fd, char **remainder);
-// static char	*get_line(char *text);
-// static char	*get_remainder(char *text);
-// static char	*read_file(int fd, char *total_buffer);
+/**
+ * @brief Free and assign NULL to 'ptr'
+ *
+ * @param ptr The pointer to reset
+ * @return None
+*/
+void		reset_ptr(void *ptr);
 
 /**
  * @brief Calculates the length of the string s, excluding the terminatig null
@@ -87,9 +85,5 @@ char		*ft_strjoin(char const *s1, char const *s2);
  * insufficient memory was available
 */
 char		*ft_strdup(const char *s);
-
-/* TEMPORARY */
-void		*ft_memset(void *dest, int c, size_t len);
-void		*ft_calloc(size_t nmemb, size_t size);
 
 #endif
