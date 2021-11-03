@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 14:50:06 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/11/03 06:36:52 by bcorrea-         ###   ########.fr       */
+/*   Created: 2021/11/03 05:34:43 by bcorrea-          #+#    #+#             */
+/*   Updated: 2021/11/03 06:29:23 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -46,15 +50,13 @@ void		*reset_ptr(void *ptr);
 size_t		ft_strlen(const char *s);
 
 /**
- * @brief Copies n bytes from memory area src to memory area dest. The memory
- * areas must not overlap
+ * @brief Returns a pointer to the first occurrence of the character in the
+ * string s
  *
- * @param dest Pointer to destination memory area address
- * @param src Pointer to source memory area address
- * @param n Buffer size in bytes
- * @return void* Returns dest
+ * @param s The source string
+ * @param c The character to be found
+ * @return char* Returns the pointer to c if found or NULL if not
 */
-
 char		*ft_strchr(const char *s, int c);
 
 /**

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 14:58:41 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/11/03 06:39:04 by bcorrea-         ###   ########.fr       */
+/*   Created: 2021/11/03 05:34:52 by bcorrea-          #+#    #+#             */
+/*   Updated: 2021/11/03 06:29:00 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*reset_ptr(void *ptr)
 {

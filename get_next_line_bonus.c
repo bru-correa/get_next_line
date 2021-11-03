@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcorrea- <bruuh.cor@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 14:57:47 by bcorrea-          #+#    #+#             */
-/*   Updated: 2021/11/03 06:37:37 by bcorrea-         ###   ########.fr       */
+/*   Created: 2021/11/03 05:32:51 by bcorrea-          #+#    #+#             */
+/*   Updated: 2021/11/03 06:54:19 by bcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*get_text(int fd, char *remainder);
 static char	*read_file(int fd, char *total_buffer);
@@ -21,17 +21,17 @@ char	*get_next_line(int fd)
 {
 	char			*line;
 	char			*text;
-	static char		*remainder;
+	static char		*remainder[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
-	if (ft_strchr(remainder, '\n') != NULL)
-		text = remainder;
+	if (ft_strchr(remainder[fd], '\n') != NULL)
+		text = remainder[fd];
 	else
-		text = get_text(fd, remainder);
+		text = get_text(fd, remainder[fd]);
 	if (text == NULL)
 		return (NULL);
-	remainder = get_remainder(text);
+	remainder[fd] = get_remainder(text);
 	line = get_line(text);
 	free(text);
 	if (line == NULL)
